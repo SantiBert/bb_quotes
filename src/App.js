@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled from '@emotion/styled';
+
+const Content = styled.div`
+  display:flex;
+  align-items: center;
+  padding-top: 5rem;
+  flex-direction: column;
+`;
+
+const Button = styled.button`
+  background: -webkit-linear-gradient(top left, #007b35 0%,  #007b35 40%,  #0f574e 100%);
+  background-size: 300px;
+  font-size: 'Arial', Arial, Helvetica, sans-serif;
+  color:#fff;
+  margin-top: 3rem;
+  padding: 1rem 3rem;
+  font-size: 2rem;
+  border: 2px solid black;
+`;
 
 function App() {
+
+  const callApi = async () => {
+    const api = await fetch('https://breaking-bad-quotes.herokuapp.com/v1/quotes');
+    const quote = await api.json();
+    console.log(quote);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Content>
+      <Button
+        onClick={callApi}
+      >
+        Obtener frase
+      </Button>
+    </Content>
   );
 }
 
